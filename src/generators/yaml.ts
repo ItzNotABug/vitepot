@@ -1,0 +1,76 @@
+import type { Generator } from "./shared.js";
+import { addWarningComment } from "./shared.js";
+
+/**
+ * YAML config file generator
+ */
+export const yamlGenerator: Generator = (ctx) => {
+	const { path, helpers } = ctx;
+
+	const sections = [
+		`# ${addWarningComment(path, "hash").replace("#", "").trim()}`,
+		`# Production configuration - ${helpers.fakeTimestamp()}`,
+		"",
+		"app:",
+		"  name: production-app",
+		"  env: production",
+		`  url: https://${helpers.fakeDomain()}`,
+		`  key: ${helpers.fakePhpSecret()}`,
+		"",
+		"database:",
+		"  driver: mysql",
+		`  host: ${helpers.fakeTestNetIPv4()}`,
+		"  port: 3306",
+		`  database: ${helpers.fakeDomain().split(".")[0]}_db`,
+		"  username: app_user",
+		`  password: "${helpers.fakeMysqlPassword()}"`,
+		"",
+		"cache:",
+		"  driver: redis",
+		`  host: ${helpers.fakeTestNetIPv4()}`,
+		"  port: 6379",
+		"",
+		"mail:",
+		"  driver: smtp",
+		`  host: ${helpers.fakeHostname()}`,
+		"  port: 587",
+		`  username: ${helpers.fakeEmail()}`,
+		`  password: "${helpers.fakeMysqlPassword()}"`,
+		"  encryption: tls",
+		"",
+		"services:",
+		"  aws:",
+		`    access_key_id: ${helpers.fakeCloudKey()}`,
+		`    secret_access_key: ${helpers.fakeJwtLikeSecret()}`,
+		"    region: us-east-1",
+		"    bucket: production-uploads",
+		"",
+		"  stripe:",
+		`    public_key: ${helpers.fakeApiToken()}`,
+		`    secret_key: ${helpers.fakeApiToken()}`,
+		"",
+		"  ai:",
+		`    openai_key: ${helpers.fakeApiToken()}`,
+		`    anthropic_key: ${helpers.fakeApiToken()}`,
+		`    google_key: ${helpers.fakeApiToken()}`,
+		`    huggingface_key: ${helpers.fakeApiToken()}`,
+		"",
+		"  supabase:",
+		`    url: https://${helpers.fakeDomain()}`,
+		`    anon_key: ${helpers.fakeJwtLikeSecret()}`,
+		"",
+		"  clerk:",
+		`    secret_key: ${helpers.fakeApiToken()}`,
+		`    publishable_key: ${helpers.fakeApiToken()}`,
+		"",
+		"monitoring:",
+		`  sentry_dsn: https://${helpers.fakeApiToken()}@${helpers.fakeHostname()}/123`,
+		`  datadog_key: ${helpers.fakeApiToken()}`,
+		"",
+		"api:",
+		`  key: ${helpers.fakeApiToken()}`,
+		`  secret: ${helpers.fakeJwtLikeSecret()}`,
+	];
+
+	return sections.join("\n");
+};
