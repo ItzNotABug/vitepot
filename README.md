@@ -17,7 +17,7 @@ of your real surface area.
 
 - Serves traps from memory in `vitepress dev`
 - Emits real trap files during `vitepress build`
-- Reuses the same trap responses in preview
+- Reuses the same trap responses in preview (except for dotfiles)
 - Generates syntax-aware fake content for env, PHP, SQL, Git, JSON, JS, YAML, Python, INI, logs, and plain text
 - Uses reserved `.test` domains and RFC 5737 test-net IPs so generated data never points to real infrastructure
 - Supports custom traps with sync content, async content, binary content, and per-trap directory placement
@@ -61,11 +61,11 @@ export default defineConfig({
                 variants: ['cms-roots', 'archive-roots'],
                 dirs: ['/legacy'],
                 custom: [
-                    { 
+                    {
                         path: '/private.env'
                     },
-                    { 
-                        path: '/secrets.ini', kind: 'ini' 
+                    {
+                        path: '/secrets.ini', kind: 'ini'
                     },
                     {
                         path: '/credentials.txt',
@@ -112,6 +112,7 @@ collided with an existing output file, VitePot **skips it** and logs a warning.
 ### Preview
 
 During preview, the same trap middleware is mounted so local preview behavior stays aligned with the built output.
+Note: Dotfiles are not served due to Vite/Vitepress limitations.
 
 ## Built-In Trap Set
 
@@ -266,6 +267,23 @@ helpers.fakeSentryDSN()        // https://key@host.test/123
 ```
 
 All generated domains use the reserved `.test` TLD, and all generated IPs use RFC 5737 test-net ranges.
+
+## Important Notes
+
+### Server Execution Prevention
+
+If your production server can execute certain file types (PHP, Python, Ruby, etc.), configure it to serve honeypot files
+as static text instead of executing them. Use `.htaccess` (Apache), `nginx.conf` (Nginx), or equivalent configuration
+for your web server to disable execution and force `text/plain` content-type for trap files.
+
+### Dotfile Limitations
+
+**VitePress Preview:** Dotfiles (`.env`, `.git/config`, etc.) are blocked by VitePress's preview server. They work in
+dev. mode via middleware and are emitted during build, but won't be served in `vitepress preview`.
+
+**Production Hosting:** Some managed hosting providers might block dotfiles for security. Non-dotfile traps
+(`wp-config.php`, `backup.sql`, etc.) work everywhere. Dotfiles should work on servers where you have full control (VPS,
+dedicated servers with custom web server configuration).
 
 ## Development
 
