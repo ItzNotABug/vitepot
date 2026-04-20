@@ -278,8 +278,8 @@ for your web server to disable execution and force `text/plain` content-type for
 
 ### Dotfile Limitations
 
-**VitePress Preview:** Dotfiles (`.env`, `.git/config`, etc.) are blocked by VitePress's preview serverThey work in dev
-mode via middleware and are emitted during build, but won't be served in `vitepress preview`.
+**VitePress Preview:** Dotfiles (`.env`, `.git/config`, etc.) are blocked by VitePress's preview server. They work in
+dev. mode via middleware and are emitted during build, but won't be served in `vitepress preview`.
 
 **Production Hosting:** Some managed hosting providers might block dotfiles for security. Non-dotfile traps
 (`wp-config.php`, `backup.sql`, etc.) work everywhere. Dotfiles should work on servers where you have full control (VPS,
