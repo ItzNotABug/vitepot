@@ -1,6 +1,6 @@
 {
     "name": "@itznotabug/vitepot",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Static-first Vite/VitePress honeypot plugin for serving fake sensitive files to crawlers, scanners, and bots.",
     "type": "module",
     "packageManager": "bun@1.3.12",
