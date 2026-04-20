@@ -1,0 +1,48 @@
+name: Publish to pkg.vc
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "package.json"
+      - "bun-lock.yaml"
+      - "tsconfig.json"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to publish from'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || github.ref }}
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.12
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build package
+        run: bun run build
+
+      - name: Publish to pkg.vc
+        uses: pkg-vc/publish-action@main
+        with:
+          organization: itznotabug
+          directory: ./
+          secret: ${{ secrets.PKG_VC_SECRET }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
