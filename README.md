@@ -267,15 +267,6 @@ helpers.fakeSentryDSN()        // https://key@host.test/123
 
 All generated domains use the reserved `.test` TLD, and all generated IPs use RFC 5737 test-net ranges.
 
-## Limits
-
-VitePot is a static deception plugin, not a full bot-management system.
-
-- It does not classify bots or score requests
-- It does not do dynamic tarpits, throttling, or proof-of-work
-- It does not replace a WAF, reverse proxy, edge worker, or bot firewall
-- It is best used as a lightweight deception layer on top of normal security controls
-
 ## Development
 
 ```bash
