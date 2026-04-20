@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [
+      opened,
+      synchronize,
+      reopened
+    ]
 
 concurrency:
   group: vitepot-ci-${{ github.ref }}
