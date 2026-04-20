@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@itznotabug/vitepot.svg?logo=npm&logoColor=white)](https://www.npmjs.com/package/@itznotabug/vitepot)
 [![CI](https://img.shields.io/github/actions/workflow/status/itznotabug/vitepot/ci.yaml?branch=main&logo=github&logoColor=white)](https://github.com/itznotabug/vitepot/actions/workflows/ci.yaml)
-[![License](https://img.shields.io/npm/l/@itznotabug/vitepot.svg?logo=apache&logoColor=white)](./LICENSE)
+[![License](https://img.shields.io/npm/l/%40itznotabug%2Fvitepot?logo=apache&logoColor=white&color=blue)](https://github.com/ItzNotABug/vitepot/blob/main/LICENSE)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF.svg?logo=vite&logoColor=white)](https://vite.dev/)
 [![VitePress](https://img.shields.io/badge/VitePress-1.x-5a67d8.svg?logo=vitepress&logoColor=white)](https://vitepress.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-ready-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
