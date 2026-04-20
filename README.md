@@ -17,7 +17,7 @@ of your real surface area.
 
 - Serves traps from memory in `vitepress dev`
 - Emits real trap files during `vitepress build`
-- Reuses the same trap responses in preview
+- Reuses the same trap responses in preview (except for dotfiles)
 - Generates syntax-aware fake content for env, PHP, SQL, Git, JSON, JS, YAML, Python, INI, logs, and plain text
 - Uses reserved `.test` domains and RFC 5737 test-net IPs so generated data never points to real infrastructure
 - Supports custom traps with sync content, async content, binary content, and per-trap directory placement
@@ -112,6 +112,7 @@ collided with an existing output file, VitePot **skips it** and logs a warning.
 ### Preview
 
 During preview, the same trap middleware is mounted so local preview behavior stays aligned with the built output.
+Note: Dotfiles are not served due to Vite/Vitepress limitations.
 
 ## Built-In Trap Set
 
